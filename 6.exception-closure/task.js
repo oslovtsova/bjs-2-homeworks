@@ -1,55 +1,61 @@
-﻿/*            Задача 1            */
+﻿/* Задача 1 */
 
-function parseCount(number) {
-	let result = Number.parseFloat(number);
-	if (Number.isNaN(result)) {
+function parseCount(num) {
+	let num1 = Number.parseFloat(num);
+	if (Number.isNaN(num1)) {
 		throw new Error("Невалидное значение");
+	} else {
+		return num1;
 	}
-	return result;
 }
 
-function validateCount(number) {
+function validateCount(num) {
 	try {
-		return parseCount(number);
+		return parseCount(num);
 	} catch (error) {
 		return error;
+	} finally {
+
 	}
 }
 
-/*            Задача 2            */
+/* Задача 2 */
 
 class Triangle {
 	constructor(a, b, c) {
-		this.a = a;
-		this.b = b;
-		this.c = c;
-		if ((a + b <= c) || (a + c <= b) || (c + b <= a)) {
-			throw new Error("Треугольник c такими сторонами не существует");
+		if (((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
+			throw new Error("Треугольник с такими сторонами не существует");
+		} else {
+			this.a = a;
+			this.b = b;
+			this.c = c;
 		}
 	}
-
-	get perimeter(a, b, c) {
-		let perimeter = a + b + c;
-		return perimeter;
+	get perimeter() {
+		let p = (this.a + this.b + this.c);
+		return p;
 	}
-
-	get area(a, b, c) {
-		let p = this.perimeter / 2;
-		return +(Math.sqrt(p * (p - a) * (p - b) * (p - c))).toFixed(3);
+	get area() {
+		let p = (this.a + this.b + this.c) / 2;
+		return +( Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) ).toFixed(3);
 	}
 }
 
-function getTriangl(a, b, c) {
+function getTriangle(a, b, c) {
 	try {
-		return new Triangle(a, b, c);
+		let trg = new Triangle(a, b, c);
+		return trg;
 	} catch (error) {
-		return {
-			area() {
-				return "Ошибка! Треугольник не существует"
+		let err = {
+			get perimeter() {
+				return "Ошибка! Треугольник не существует";
 			},
-			perimeter() {
-				return "Ошибка! Треугольник не существует"
+			get area() {
+				return "Ошибка! Треугольник не существует";
 			}
 		}
+		return err;
+	} finally {
+
 	}
 }
